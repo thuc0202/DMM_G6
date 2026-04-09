@@ -169,7 +169,8 @@ class GraphBuilder:
             })
             if len(batch) == 500:
                 self.graph.query(
-                    "UNWIND $rows AS r MERGE (:Product {product_id: r.product_id}) "
+                    "UNWIND $rows AS r "
+                    "MERGE (n:Product {product_id: r.product_id}) "
                     "SET n.name = r.name, n.category = r.category",
                     {"rows": batch}
                 )
